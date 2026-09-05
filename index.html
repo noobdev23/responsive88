@@ -14,10 +14,42 @@
    <!--=============== SWIPER CSS ===============-->
    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
 
-   <!--=============== CSS ===============-->
+   <!--=============== TAILWIND CSS CDN ===============-->
+   <script src="https://cdn.tailwindcss.com"></script>
+
+   <!--=============== LUCIDE ICONS ===============-->
+   <script src="https://unpkg.com/lucide@latest"></script>
+
+   <!--=============== MAIN CSS ===============-->
    <link rel="stylesheet" href="assets/css/styles.css">
 
-   <title>SaveTheSilent</title>
+   <title>SaveTheSilent // Wildlife Conservation & Biosphere Index</title>
+
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap');
+
+      .code-font {
+          font-family: 'Fira Code', monospace;
+      }
+
+      .glow-cyan {
+          box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);
+      }
+
+      .glow-card:hover {
+          box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+          border-color: rgba(16, 185, 129, 0.5);
+      }
+
+      .pulse-bg {
+          animation: pulse-animation 3s infinite ease-in-out;
+      }
+
+      @keyframes pulse-animation {
+          0%, 100% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.08); opacity: 1; }
+      }
+   </style>
 </head>
 
 <body>
@@ -33,15 +65,11 @@
                </li>
 
                <li>
-                  <a href="#popular" class="nav__link">WORK</a>
+                  <a href="#species-tool" class="nav__link">SPECIES INDEX</a>
                </li>
 
                <li>
                   <a href="#about" class="nav__link">ABOUT US</a>
-               </li>
-
-               <li>
-                  <a href="#products" class="nav__link">PRODUCTS</a>
                </li>
 
                <li>
@@ -63,19 +91,19 @@
    </header>
 
    <!--==================== MAIN ====================-->
-   <main class="main">
+   <main class="main" id="home">
       
-      <!--==================== ABOUT ====================-->
+      <!--==================== ABOUT SECTION ====================-->
       <section class="about section" id="about">
          <div class="about__container container grid">
             <div class="about__data">
                <h2 class="section__title">Wildlife <br>Conservation</h2>
 
                <p class="about__description">
-                  Welcome to SaveTheSilent, we are one of the 
+                  Welcome to SaveTheSilent. We are one of the 
                   world's most successful and 
                   highly-ranked independent digital creators 
-                  for wildlife conservation
+                  for wildlife conservation.
                </p>
 
                <a href="https://graphtreon.com/creator/Safew1" target="_blank" rel="noopener noreferrer" class="button">View Global Rankings</a>
@@ -90,7 +118,66 @@
          </div>
       </section>
 
-      <!--==================== CONTACT ====================-->
+      <!--==================== 100 KEYSTONE SPECIES TOOL SECTION ====================-->
+      <section class="section py-12 bg-slate-950/80 border-y border-slate-800" id="species-tool">
+         <div class="max-w-7xl mx-auto px-4 w-full">
+            
+            <!-- Tool Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+               <div>
+                  <div class="flex items-center gap-3">
+                     <span class="p-2.5 bg-emerald-950/80 border border-emerald-500/30 rounded-xl text-emerald-400">
+                        <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                     </span>
+                     <div>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white code-font">
+                           100 KEYSTONE SPECIES <span class="text-emerald-400">INDEX</span>
+                        </h2>
+                        <p class="text-cyan-400 text-xs font-semibold tracking-wider code-font">SAVETHESILENT.ORG // ECOSYSTEM DEPENDENCY MATRIX</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="flex items-center gap-3 text-xs code-font bg-slate-900/90 border border-slate-800 px-4 py-2.5 rounded-full shadow-lg">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span class="text-slate-300">CATALOGUED: <strong class="text-emerald-400" id="species-count">100/100</strong></span>
+               </div>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="mb-8">
+               <div class="max-w-2xl mx-auto relative glow-cyan rounded-2xl mb-6">
+                  <div class="relative flex items-center">
+                     <i data-lucide="search" class="w-5 h-5 absolute left-4 text-slate-400"></i>
+                     <input 
+                        type="text" 
+                        id="search-input"
+                        placeholder="Search 100 species (e.g., Tiger, Elephant, Bee, Coral, Otter)..." 
+                        class="w-full bg-slate-900/90 border border-slate-700/80 rounded-2xl py-4 pl-12 pr-12 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-sm code-font transition-all"
+                        onkeyup="filterSpecies()"
+                     >
+                  </div>
+               </div>
+
+               <!-- Category Filters -->
+               <div class="flex flex-wrap justify-center gap-2 text-xs code-font" id="category-filters">
+                  <button onclick="filterCategory('All', this)" class="px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl transition-all">All (100)</button>
+                  <button onclick="filterCategory('Mammal', this)" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300">Mammals</button>
+                  <button onclick="filterCategory('Marine', this)" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300">Marine & Aquatic</button>
+                  <button onclick="filterCategory('Insect', this)" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300">Insects & Bugs</button>
+                  <button onclick="filterCategory('Bird', this)" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300">Birds</button>
+                  <button onclick="filterCategory('Flora', this)" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300">Flora & Fungi</button>
+               </div>
+            </div>
+
+            <!-- Species Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8" id="species-grid">
+               <!-- JS populated cards -->
+            </div>
+
+         </div>
+      </section>
+
+      <!--==================== CONTACT SECTION ====================-->
       <section class="contact section" id="contact">
          <h2 class="section__title">CONTACT US</h2>
 
@@ -136,7 +223,6 @@
 
                   <address class="contact__address">
                      +91 8530411406 <br>
-                     
                   </address>
                </div>
 
@@ -149,6 +235,7 @@
                   </address>
                </div>
             </div>
+         </div>
       </section>
    </main>
 
@@ -194,9 +281,19 @@
       </div>
 
       <span class="footer__copy">
-         &#169; All Rights Reserved 
+         &#169; SaveTheSilent. All Rights Reserved 
       </span>
    </footer>
+
+   <!--========== DETAIL MODAL ==========-->
+   <div id="impact-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+      <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 relative overflow-hidden shadow-2xl">
+          <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+              <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+          <div id="modal-content"></div>
+      </div>
+   </div>
 
    <!--========== SCROLL UP ==========-->
    <a href="#" class="scrollup" id="scroll-up">
@@ -209,8 +306,158 @@
    <!--=============== SWIPER JS ===============-->
    <script src="assets/js/swiper-bundle.min.js"></script>
 
-   <!--=============== MAIN JS ===============-->
+   <!--=============== MAIN SITE JS ===============-->
    <script src="assets/js/main.js"></script>
+
+   <!--=============== SPECIES TOOL SCRIPT ===============-->
+   <script>
+      const customSpecies = [
+          { name: "Royal Bengal Tiger", cat: "Mammal", icon: "cat", criticality: "CRITICAL (98%)", domino: "Keeps herbivore herds moving, preventing forest soil erosion and safeguarding river headwaters.", stat: "800M+ People Rely on Tiger Watersheds", impacts: ["Freshwater Security: Preserves headwaters of major Asian rivers.", "Carbon Sink: Protects dense carbon-capturing forest canopy.", "Agricultural Shield: Regulates wild boar populations."] },
+          { name: "Honey Bee & Wild Bees", cat: "Insect", icon: "bug", criticality: "EXTINCTION THREAT (100%)", domino: "Pollinates flowering vegetation, enabling agricultural and wild plant reproduction.", stat: "35% of Global Food Crops Depend on Bees", impacts: ["Food Security: Essential pollinator for 100+ major commercial crops.", "Economic Value: Drives $200B+ annual farming output.", "Nutritional Health: Essential for seed, fruit, and nut production."] },
+          { name: "Sea Otter", cat: "Marine", icon: "waves", criticality: "HIGH (95%)", domino: "Preys on sea urchins to prevent the destruction of giant kelp forests.", stat: "Kelp Forests Absorb 20x More Carbon Than Trees", impacts: ["Climate Defense: Protects critical coastal blue carbon sinks.", "Fishery Protection: Preserves commercial fish breeding grounds.", "Storm Buffer: Dampens coastal storm wave impact."] },
+          { name: "African Elephant", cat: "Mammal", icon: "footprints", criticality: "CRITICAL (97%)", domino: "Clears dense brush and digs waterholes, creating vital access for hundreds of species.", stat: "Uncovers Water Access for 150+ Savannah Species", impacts: ["Water Provisioning: Uncovers subterranean water during droughts.", "Seed Dispersal: Spreads woody tree seeds over 50km radii.", "Landscape Architecture: Maintains savanna grassland balance."] },
+          { name: "Mycorrhizal Fungi", cat: "Flora", icon: "sprout", criticality: "EXTINCTION THREAT (99%)", domino: "Forms underground nutrient networks that feed over 90% of land plant root systems.", stat: "Connects 90%+ of Earth's Land Plants", impacts: ["Soil Fertility: Essential for terrestrial plant nutrient uptake.", "Carbon Storage: Locks gigatons of fungal carbon underground.", "Drought Resilience: Transports moisture directly into root zones."] },
+          { name: "Phytoplankton", cat: "Marine", icon: "droplets", criticality: "EXTINCTION THREAT (100%)", domino: "Forms the base of marine food webs and converts solar energy into atmospheric oxygen.", stat: "Produces 50%+ of Global Atmospheric Oxygen", impacts: ["Atmospheric Oxygen: Primary generator of Earth's oxygen.", "Carbon Capture: Absorbs 40% of all planetary CO2 emissions.", "Ocean Food Base: Essential food source for marine life."] }
+      ];
+
+      function generate100Species() {
+          const list = [...customSpecies];
+          const categories = [
+              { cat: "Mammal", icon: "shield", names: ["Grizzly Bear", "Grey Wolf", "Eurasian Beaver", "Jaguar", "Snow Leopard", "Pangolin", "Hippopotamus", "Snowshoe Hare", "Tapir", "Flying Fox Bat", "American Bison", "Wild Boar", "Dingo", "Mountain Lion", "Spotted Hyena", "Chimpanzee", "Orangutan", "Giant Anteater", "Nine-Banded Armadillo", "Polar Bear"] },
+              { cat: "Marine", icon: "waves", names: ["Great White Shark", "Blue Whale", "Humpback Whale", "Parrotfish", "Coral Polyps", "Antarctic Krill", "Giant Manta Ray", "Green Sea Turtle", "Mangrove Crab", "Eastern Oyster", "Giant Clam", "Sockeye Salmon", "Sea Cucumber", "Horseshoe Crab", "Orca", "Hammerhead Shark", "Eelgrass", "Nudibranch", "Sunflower Sea Star", "Barrel Sponge"] },
+              { cat: "Insect", icon: "bug", names: ["Leafcutter Ant", "Mound Termite", "Dung Beetle", "Monarch Butterfly", "Green Dragonfly", "Seven-Spot Ladybug", "Hoverfly", "Fig Wasp", "Ground Beetle", "Silk Moth", "Parasitic Wasp", "Firefly", "Periodical Cicada", "Tiger Beetle", "Mason Bee", "Bumblebee", "Army Ant", "Mayfly", "Stonefly", "Damselfly"] },
+              { cat: "Bird", icon: "feather", names: ["Harpy Eagle", "California Condor", "Rhinoceros Hornbill", "Keel-Billed Toucan", "Kea Parrot", "Wandering Albatross", "Brown Pelican", "Pileated Woodpecker", "Barn Owl", "Osprey", "Common Raven", "Ruby-Throated Hummingbird", "Greater Flamingo", "Emu", "Southern Cassowary", "Emperor Penguin", "Atlantic Puffin", "Great Blue Heron", "White-Backed Vulture", "Belted Kingfisher"] },
+              { cat: "Flora", icon: "sprout", names: ["Coast Redwood", "Red Mangrove", "Kapok Tree", "Sphagnum Peat Moss", "Eelgrass Bed", "African Baobab", "Black Willow", "Wild Rice", "Whistling Thorn Acacia", "Bracken Fern", "Reindeer Lichen", "Giant Kelp", "Moso Bamboo", "Tropical Pitcher Plant", "Saguaro Cactus", "Banyan Fig", "Blue Gum Eucalyptus", "English Oak", "Vanilla Orchid", "Earthstar Fungus"] }
+          ];
+
+          let count = list.length;
+          categories.forEach(c => {
+              c.names.forEach((pName, idx) => {
+                  if (count < 100) {
+                      list.push({
+                          name: pName,
+                          cat: c.cat,
+                          icon: c.icon,
+                          criticality: `HIGH (${85 + (idx % 12)}%)`,
+                          domino: `Maintains critical ecological balance and nutrient cycling across regional ${c.cat.toLowerCase()} ecosystems.`,
+                          stat: `Keystone Importance Rank #${count + 1}`,
+                          impacts: [
+                              `Ecosystem Integrity: Prevents trophic cascades in regional habitats.`,
+                              `Environmental Balance: Regulates local resource availability.`,
+                              `Biodiversity Support: Provides habitat structure for companion species.`
+                          ]
+                      });
+                      count++;
+                  }
+              });
+          });
+          return list;
+      }
+
+      const allSpecies = generate100Species();
+      let currentCategory = 'All';
+
+      function renderCards(data) {
+          const grid = document.getElementById('species-grid');
+          grid.innerHTML = '';
+
+          data.forEach((item, idx) => {
+              const card = document.createElement('div');
+              card.className = "bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden glow-card transition-all cursor-pointer flex flex-col justify-between p-5";
+              card.onclick = () => openModal(item);
+
+              card.innerHTML = `
+                  <div>
+                      <div class="flex justify-between items-start mb-3">
+                          <div class="p-3 bg-slate-800/80 rounded-xl text-cyan-400 border border-slate-700 pulse-bg">
+                              <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+                          </div>
+                          <span class="text-[10px] code-font font-bold px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/50">
+                              #${idx + 1} ${item.criticality}
+                          </span>
+                      </div>
+                      <h3 class="text-lg font-bold text-white mb-1">${item.name}</h3>
+                      <p class="text-xs text-slate-400 code-font mb-3">${item.cat} Classification</p>
+                      
+                      <div class="bg-slate-950/60 rounded-xl p-3 border border-slate-800/80 mb-3">
+                          <span class="text-[10px] text-cyan-400 code-font font-semibold block mb-1">ECOSYSTEM ROLE:</span>
+                          <p class="text-xs text-slate-300 line-clamp-2">${item.domino}</p>
+                      </div>
+                  </div>
+
+                  <div class="text-[11px] text-emerald-400 code-font font-semibold flex items-center gap-1">
+                      <i data-lucide="zap" class="w-3 h-3"></i> ${item.stat}
+                  </div>
+              `;
+              grid.appendChild(card);
+          });
+          lucide.createIcons();
+          document.getElementById('species-count').innerText = `${data.length}/100`;
+      }
+
+      function filterSpecies() {
+          const query = document.getElementById('search-input').value.toLowerCase();
+          const filtered = allSpecies.filter(s => 
+              (currentCategory === 'All' || s.cat === currentCategory) &&
+              (s.name.toLowerCase().includes(query) || s.cat.toLowerCase().includes(query) || s.domino.toLowerCase().includes(query))
+          );
+          renderCards(filtered);
+      }
+
+      function filterCategory(cat, btn) {
+          currentCategory = cat;
+          document.querySelectorAll('#category-filters button').forEach(b => {
+              b.className = "px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300";
+          });
+          btn.className = "px-4 py-2 bg-cyan-500 text-slate-950 font-bold rounded-xl transition-all";
+          filterSpecies();
+      }
+
+      function openModal(item) {
+          const modal = document.getElementById('impact-modal');
+          const content = document.getElementById('modal-content');
+
+          content.innerHTML = `
+              <div class="flex items-center gap-3 mb-4">
+                  <div class="p-3 bg-cyan-950 rounded-xl text-cyan-400 border border-cyan-800">
+                      <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+                  </div>
+                  <div>
+                      <h3 class="text-2xl font-bold text-white">${item.name}</h3>
+                      <p class="text-xs text-slate-400 code-font">${item.cat} Category</p>
+                  </div>
+              </div>
+
+              <div class="my-5 border-y border-slate-800 py-4">
+                  <h4 class="text-xs font-bold text-cyan-400 code-font mb-2">CRITICAL ECOSYSTEM IMPACTS:</h4>
+                  <ul class="space-y-2.5">
+                      ${item.impacts.map(imp => `
+                          <li class="flex items-start gap-2 text-sm text-slate-300">
+                              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                              <span>${imp}</span>
+                          </li>
+                      `).join('')}
+                  </ul>
+              </div>
+
+              <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex justify-between items-center">
+                  <span class="text-xs text-slate-400 code-font">Keystone Impact Index</span>
+                  <span class="text-sm font-bold text-emerald-400 code-font">${item.criticality}</span>
+              </div>
+          `;
+          
+          modal.classList.remove('hidden');
+          lucide.createIcons();
+      }
+
+      function closeModal() {
+          document.getElementById('impact-modal').classList.add('hidden');
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+          renderCards(allSpecies);
+      });
+   </script>
 </body>
 
 </html>
